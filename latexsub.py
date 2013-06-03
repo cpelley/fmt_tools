@@ -1,8 +1,16 @@
-#! /usr/bin/python
+#!/usr/bin/env python
+
+"""wrapper for compiling latex documents"""
 
 import os
 from glob import glob
 import sys
+
+
+__author__ = "Carwyn Pelley"
+__license__ = "LGPLv3"
+__version__ = "1.0.0"
+__email__ = "cpelley.pub@gmail.com"
 
 
 class CompileLatex():

@@ -9,7 +9,7 @@ import sys
 
 __author__ = "Carwyn Pelley"
 __license__ = "LGPLv3"
-__version__ = "1.0.0"
+__version__ = "0.9.0"
 __email__ = "cpelley.pub@gmail.com"
 
 

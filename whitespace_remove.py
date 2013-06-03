@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     for fname in flist:
         nlines, diff = rm_whitespace(fname)
-        if debug and diff.next():
+        if debug:
             for dd in diff:
                 print dd
         elif nlines:
@@ -77,3 +77,4 @@ if __name__ == '__main__':
                 update_file(fname, nlines)
             except StopIteration:
                 pass
+    print 'completed'

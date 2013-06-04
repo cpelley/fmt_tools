@@ -30,6 +30,7 @@ def rm_whitespace(fname):
             nlines.append(re.sub('[\t ]*$\n', '\n', line))
 
     # Remove empty lines
+    ind = None
     for ind, line in enumerate(nlines[::-1]):
         if line != '\n':
             break

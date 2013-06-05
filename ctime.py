@@ -4,6 +4,12 @@ import datetime
 import inspect
 
 
+__author__ = "Carwyn Pelley"
+__license__ = "LGPLv3"
+__version__ = "0.9.0"
+__email__ = "cpelley.pub@gmail.com"
+
+
 class TimeIt(object):
     def __init__(self, t1=None):
         """

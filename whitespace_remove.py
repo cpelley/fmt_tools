@@ -124,7 +124,7 @@ if __name__ == '__main__':
     if args.debug is True:
         msg = 'file change preview: {}, {} lines difference'
     else:
-        meg = 'updating: {}, {} lines changed'
+        msg = 'updating: {}, {} lines changed'
     for fname in updated.iteritems():
         print msg.format(*fname)
     print '\ncompleted'

@@ -22,46 +22,30 @@ Timer class for simple benchmarking
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import datetime
-import inspect
+from contextlib import contextmanager
+from time import time
 
 
-class TimeIt(object):
-    def __init__(self, t1=None):
-        """
-        Timming a code snippet.
+@contextmanager
+def timeit(t1=None):
+    """
+    Timming a code snippet.
 
-        Kwargs:
+    Function returns the number of seconds between the specified time or
+    entering the context manager and exiting the context manager.
 
-        * t1 (datetime object):
-            Start time
+    Kwargs:
 
-        .. note::
+    * t1 (time.time):
+        Start time in seconds since epoch, in UTC.
 
-            A timedelta object is assigned to self.result and trace
-            information storred in self.location
+    For example::
 
-        """
-        if t1:
-            self.t1 = t1
-        else:
-            self.t1 = None
-        self.t2 = None
+        with timeit():
+            some_hungry_operation()
 
-        frame, fnme, lineno, func_nme, lines, _ = inspect.getouterframes(
-            inspect.currentframe())[1]
-        self.location = '> {}({}){}\n->{}'.format(
-            fnme, lineno, func_nme, lines[0])
-
-    def __enter__(self):
-        self.t1 = datetime.datetime.now()
-        return self
-
-    def __exit__(self, type, value, traceback):
-        self.t2 = datetime.datetime.now()
-        self.result = self.t2 - self.t1
-        self.scr_print()
-
-    def scr_print(self):
-        print self.location
-        print 'completed in {}\n'.format(self.t2 - self.t1)
+    """
+    if t1 is None:
+        t1 = time()
+    yield
+    print time() - t1

@@ -2,7 +2,7 @@
 Timer class for simple benchmarking
 
 """
-# Copyright (c) 2013 Carwyn Pelley
+# Copyright (c) 2022 Carwyn Pelley
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,31 @@ from contextlib import contextmanager
 from time import time
 
 
+class TimeIt:
+    def __init__(self, verbose=False):
+        self._verbose = verbose
+        self._elapsed = None
+        self._start = None
+
+    def __enter__(self):
+        self._start = time.perf_counter()
+        return self
+
+    def __exit__(self, *args):
+        self._elapsed = time.perf_counter() - self._start
+        if self.verbose:
+            print(str(self))
+
+    @property
+    def elapsed(self):
+        """Return elapsed time in seconds."""
+        return self._elapsed
+
+    def __str__(self):
+        """Print elapsed time in seconds."""
+        return f"Run-time: {self._elapsed}s"
+
+
 @contextmanager
 def timeit(t1=None):
     """
@@ -46,6 +71,6 @@ def timeit(t1=None):
 
     """
     if t1 is None:
-        t1 = time()
+        t1 = time.perf_counter()
     yield
-    print time() - t1
+    print time.perf_counter() - t1
